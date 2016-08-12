@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+<title>Flaskr</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/jumbotron-narrow.css') }}">
+<!--<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">-->
+
+<body>
+  <div class="container">
+    <div class="header clearfix">
+      <nav>
+        <ul class="nav nav-pills pull-right">
+          <li role="presentation" class="active"><a href="#">Home</a></li>          
+          <li role="presentation">
+            {% if not session.logged_in %}
+            <a href="{{ url_for('login') }}">Log in</a> {% else %}
+            <a href="{{ url_for('logout') }}">Log out</a> {% endif %}
+          </li>
+        </ul>
+      </nav>
+      <h1 class="text-muted">Flaskr</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        {% for message in get_flashed_messages() %}
+        <div class=flash>{{ message }}</div>
+        {% endfor %} {% block body %}{% endblock %}
+      </div>
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>

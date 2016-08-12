@@ -1,0 +1,19 @@
+{% extends "../layout.html" %}
+{% block body %}
+  {% if session.logged_in %}        
+  
+  <div class="row marketing">
+    <div class="col-lg-6">
+      {% for user in users %}
+      <h4>{{ user.nickname }}</h4>
+      <p>
+        {{ user.email }}
+      </p>      
+    {% else %}
+      <em>Unbelievable.  No Users here so far</em>
+    {% endfor %}  
+    </div>
+  </div>  
+  </ul>
+  {% endif %}    
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}  
+  
+  <div class="row marketing">
+    <div class="col-lg-6">
+      {% for feed in entries %}
+      <h4>{{ entry.title }}</h4>
+      <p>
+        {{ entry.text|safe }}
+      </p>      
+    {% else %}
+      <em>Unbelievable.  No entries here so far</em>
+    {% endfor %}  
+    </div>
+    
+    
+  </div>
+  
+  </ul>
+{% endblock %}
