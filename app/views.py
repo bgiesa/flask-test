@@ -52,7 +52,9 @@ def login():
     
     if form.validate_on_submit():
         user = User.query.filter_by(nickname=request.form['username']).first()
-        if user.password != request.form['password']:
+        if user == None:
+            error = 'Invalid User'
+        elif user.password != request.form['password']:
             error = 'Invalid Password'
         else:
             login_user(user)
