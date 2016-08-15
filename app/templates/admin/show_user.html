@@ -1,19 +1,21 @@
-{% extends "../layout.html" %}
-{% block body %}
-  {% if session.logged_in %}        
-  
-  <div class="row marketing">
-    <div class="col-lg-6">
+{% extends "layout.html" %} {% block body %} {% if session.logged_in %}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-condensed">
+      <tr>
+        <th>#</th>
+        <th>Username</th>
+        <th>Email</th>
+      </tr>
       {% for user in users %}
-      <h4>{{ user.nickname }}</h4>
-      <p>
-        {{ user.email }}
-      </p>      
-    {% else %}
-      <em>Unbelievable.  No Users here so far</em>
-    {% endfor %}  
-    </div>
-  </div>  
-  </ul>
-  {% endif %}    
-{% endblock %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.nickname }}</td>
+        <td>{{ user.email }}</td>
+      </tr>
+      {% else %}
+      <em>Unbelievable.  No Users here so far</em> {% endfor %}
+    </table>
+  </div>
+</div>
+{% endif %} {% endblock %}

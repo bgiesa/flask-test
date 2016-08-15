@@ -4,24 +4,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 <!--<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">-->
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/jumbotron-narrow.css') }}">
-<!--<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">-->
+<!--<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/jumbotron-narrow.css') }}">-->
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
 
 <body>
   <div class="container">
-    <div class="header clearfix">
-      <nav>
-        <ul class="nav nav-pills pull-right">
-          <li role="presentation" class="active"><a href="#">Home</a></li>          
+    <!--<div class="col-md-4">
+        <h1 class="text-muted">Flaskr</h1>
+      </div>-->    
+    <nav class="navbar navbar-default">      
+      <div class="container-fluid">
+        <div class="navbar-header">      
+          <a class="navbar-brand" href="{{ url_for('index') }}">GouService</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li role="presentation" class="active"><a href="#">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if session.logged_in %}
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Admin <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li role="presentation">
+                <a href="{{ url_for('show_user') }}">Show User</a>
+              </li>
+            </ul>
+          </li>
+          {% endif %}
           <li role="presentation">
             {% if not session.logged_in %}
             <a href="{{ url_for('login') }}">Log in</a> {% else %}
             <a href="{{ url_for('logout') }}">Log out</a> {% endif %}
           </li>
         </ul>
-      </nav>
-      <h1 class="text-muted">Flaskr</h1>
-    </div>
+      </div>
+    </nav>
     <div class="row">
       <div class="col-md-12">
         {% for message in get_flashed_messages() %}
