@@ -13,26 +13,26 @@ def load_user(user_id):
 
 @app.route('/')
 @app.route('/index')
-def show_entries():    
+def show_entries():
     return render_template('layout.html')
 
 @app.route('/add', methods=['POST'])
 def add_entry():
     if not session.get('logged_in'):
-        abort(401)    
+        abort(401)
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
 
 @app.route('/admin_user')
 @login_required
-def show_user():    
+def show_user():
     return (render_template('admin/show_user.html',users=users))
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():    
+def login():
     error = None
     form = LoginForm()
-    
+
     if form.validate_on_submit():
         user = User.query.filter_by(nickname=request.form['username']).first()
         if user == None:
@@ -42,7 +42,7 @@ def login():
         else:
             login_user(user)
             session['logged_in'] = True
-            flash('You were logged in')            
+            flash('You were logged in')
             return redirect(url_for('show_entries'))
 
     return render_template('login.html', error=error, form=form)
