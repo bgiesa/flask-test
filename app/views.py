@@ -25,7 +25,7 @@ def index():
 def add_entry():
     if not session.get('logged_in'):
         abort(401)
-    flash('New entry was successfully posted')
+    flash(u'New entry was successfully posted', 'info')
     return redirect(url_for('index'))
 
 @app.route('/admin_user')
@@ -43,7 +43,7 @@ def login():
         user = form.user
         login_user(user)
         session['logged_in'] = True
-        flash('You were logged in')
+        flash(u'You were logged in', 'success')
         return redirect(url_for('index'))
     else:
         flash_errors(form)        
@@ -54,7 +54,7 @@ def login():
 def logout():
     logout_user()
     session.pop('logged_in', None)
-    flash('You were logged out')
+    flash(u'You were logged out', 'success')
     return redirect(url_for('index'))
 
 def flash_errors(form):
@@ -63,4 +63,4 @@ def flash_errors(form):
             flash(u"Error in the %s field - %s" % (
                 getattr(form, field).label.text,
                 error
-            ))    
+            ), 'danger')    
