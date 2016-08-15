@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, jsonify
 from flask_login import login_required, logout_user, login_user
+from flask_admin import helpers, expose
 from app import app, login_manager
 from .forms import LoginForm
 from .models import User
@@ -14,7 +15,11 @@ def load_user(user_id):
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('layout.html')
+    if session.get('logged_in'):        
+        return render_template('layout.html')
+    else:
+        return redirect(url_for('login'))
+
 
 @app.route('/add', methods=['POST'])
 def add_entry():
@@ -35,16 +40,13 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        user = User.query.filter_by(nickname=request.form['username']).first()
-        if user == None:
-            error = 'Invalid User'
-        elif user.password != request.form['password']:
-            error = 'Invalid Password'
-        else:
-            login_user(user)
-            session['logged_in'] = True
-            flash('You were logged in')
-            return redirect(url_for('index'))
+        user = form.user
+        login_user(user)
+        session['logged_in'] = True
+        flash('You were logged in')
+        return redirect(url_for('index'))
+    else:
+        flash_errors(form)        
 
     return render_template('login.html', error=error, form=form)
 
@@ -53,4 +55,12 @@ def logout():
     logout_user()
     session.pop('logged_in', None)
     flash('You were logged out')
-    return redirect(url_for('show_entries'))
+    return redirect(url_for('index'))
+
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(u"Error in the %s field - %s" % (
+                getattr(form, field).label.text,
+                error
+            ))    
