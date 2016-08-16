@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, jsonify
 from flask_login import login_required, logout_user, login_user
-from flask_admin import helpers, expose
+from flask_admin import helpers
 from app import app, login_manager
 from .forms import LoginForm
 from .models import User
