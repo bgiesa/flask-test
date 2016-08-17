@@ -6,9 +6,8 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 # upload configuration
-
-UPLOAD_FOLDER = basedir+'/tmp/'
-ALLOWED_EXTENSIONS = set(['txt','log'])
+UPLOADED_FILES_DEST = basedir+'/tmp/' 
+UPLOADED_FILES_ALLOW = set(['txt','log'])
 
 # wtf cofiguration
 WTF_CSRF_ENABLED = True

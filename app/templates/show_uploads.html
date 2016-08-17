@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block body %}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-condensed">
+      <tr>
+        <th>#</th>
+        <th>Filename</th>
+        <th>Owner</th>
+      </tr>
+      {% for file in files %}
+      <tr>
+        <td>{{ file.id }}</td>
+        <td>{{ file.filename }}</td>
+        <td>{{ file.user.nickname }}</td>
+      </tr>
+      {% else %}
+      <em>Unbelievable.  No Files here so far</em> {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}
