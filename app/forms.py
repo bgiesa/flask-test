@@ -21,7 +21,7 @@ class LoginForm(Form):
         rv = Form.validate(self)
         if not rv:
             return False    
-        user = get_user()
+        user = self.get_user()
         if user is None:
             self.username.errors.append('Unknown username')
             return False

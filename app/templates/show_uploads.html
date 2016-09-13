@@ -6,12 +6,14 @@
         <th>#</th>
         <th>Filename</th>
         <th>Owner</th>
+        <th>Created At</th>
       </tr>
       {% for file in files %}
       <tr>
         <td>{{ file.id }}</td>
         <td>{{ file.filename }}</td>
         <td>{{ file.user.nickname }}</td>
+        <td>{{ file.created_at }}</td>
       </tr>
       {% else %}
       <em>Unbelievable.  No Files here so far</em> {% endfor %}

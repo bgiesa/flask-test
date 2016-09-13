@@ -64,7 +64,7 @@ def upload():
             db.session.commit()
 
             flash('Log saved' ,'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('show_uploads'))
     else:
         flash('something goes wrong!', 'danger')
 
