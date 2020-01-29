@@ -13,6 +13,7 @@ def load_user(user_id):
     user = User.query.filter_by(id=user_id).first()
     return user
 
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -29,11 +30,13 @@ def add_entry():
     flash(u'New entry was successfully posted', 'info')
     return redirect(url_for('index'))
 
+
 @app.route('/admin_user')
 @login_required
 def show_user():
     users = User.query.all()
-    return (render_template('admin/show_user.html',users=users))
+    return render_template('admin/show_user.html', users=users)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -50,6 +53,7 @@ def login():
         flash_errors(form)
 
     return render_template('login.html', error=error, form=form)
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
@@ -70,11 +74,13 @@ def upload():
 
     return render_template('upload.html', form=form)
 
+
 @app.route('/show_uploads')
 def show_uploads():
     files = Upload.query.all()
 
     return render_template('show_uploads.html', files=files)
+
 
 @app.route('/logout')
 def logout():
@@ -82,6 +88,7 @@ def logout():
     session.pop('logged_in', None)
     flash(u'You were logged out', 'success')
     return redirect(url_for('index'))
+
 
 def flash_errors(form):
     for field, errors in form.errors.items():

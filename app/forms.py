@@ -36,6 +36,7 @@ class LoginForm(Form):
     def get_user(self):
         return User.query.filter_by(nickname=self.username.data).first()
 
+
 class UploadForm(Form):
     upload = FileField('filename', validators=[FileRequired(), FileAllowed(logUpload, 'Only Log Files!')])
     # upload = FileField()
@@ -57,5 +58,3 @@ class UploadForm(Form):
     #     self.filename = filename
 
     #     return True
-    
-            
